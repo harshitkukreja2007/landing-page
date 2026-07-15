@@ -8,17 +8,9 @@ export const LogoIcon = () => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="lucide lucide-panels-top-left mr-2 w-6 h-6"
+      className="lucide lucide-filter mr-2 w-6 h-6"
     >
-      <rect
-        width="18"
-        height="18"
-        x="3"
-        y="3"
-        rx="2"
-      />
-      <path d="M3 9h18" />
-      <path d="M9 21V9" />
+      <path d="M2 3h20l-8 9.5V19l-4 2v-8.5L2 3z" />
     </svg>
   );
 };

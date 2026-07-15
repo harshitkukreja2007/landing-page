@@ -1,4 +1,35 @@
+import { useState, useEffect } from "react";
+
 export const Statistics = () => {
+  const [signals, setSignals] = useState(124530);
+  const [campaigns, setCampaigns] = useState(8421);
+  const [confidence, setConfidence] = useState(92.4);
+  const [revenue, setRevenue] = useState(4281950);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      // Increment signals
+      setSignals((prev) => prev + Math.floor(Math.random() * 3) + 1);
+      
+      // Fluctuate confidence score slightly
+      setConfidence((prev) => {
+        const delta = (Math.random() * 0.4 - 0.2);
+        const next = prev + delta;
+        return parseFloat(Math.min(94.5, Math.max(90.1, next)).toFixed(1));
+      });
+
+      // Increment revenue
+      setRevenue((prev) => prev + Math.floor(Math.random() * 45) + 15);
+      
+      // Increment campaigns occasionally
+      if (Math.random() > 0.8) {
+        setCampaigns((prev) => prev + 1);
+      }
+    }, 1500);
+
+    return () => clearInterval(timer);
+  }, []);
+
   interface statsProps {
     quantity: string;
     description: string;
@@ -6,20 +37,20 @@ export const Statistics = () => {
 
   const stats: statsProps[] = [
     {
-      quantity: "2.7K+",
-      description: "Users",
+      quantity: signals.toLocaleString(),
+      description: "Signals Detected",
     },
     {
-      quantity: "1.8K+",
-      description: "Subscribers",
+      quantity: campaigns.toLocaleString(),
+      description: "Active Campaigns",
     },
     {
-      quantity: "112",
-      description: "Downloads",
+      quantity: `${confidence}%`,
+      description: "Confidence Score",
     },
     {
-      quantity: "4",
-      description: "Products",
+      quantity: `$${(revenue / 1000000).toFixed(2)}M`,
+      description: "Recovered Revenue",
     },
   ];
 
@@ -31,8 +62,8 @@ export const Statistics = () => {
             key={description}
             className="space-y-2 text-center"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold ">{quantity}</h2>
-            <p className="text-xl text-muted-foreground">{description}</p>
+            <h2 className="text-3xl sm:text-4xl font-bold transition-all duration-300 font-mono">{quantity}</h2>
+            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">{description}</p>
           </div>
         ))}
       </div>

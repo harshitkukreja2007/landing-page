@@ -1,46 +1,61 @@
-import { Button } from "./ui/button";
+import { useState, useEffect } from "react";
 import { buttonVariants } from "./ui/button";
 import { HeroCards } from "./HeroCards";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+
+const headlines = [
+  "Turn Visitor Behavior Into Revenue.",
+  "Recover Lost Customers on Autopilot.",
+  "Automatically Stop Checkout Drop-offs.",
+];
 
 export const Hero = () => {
+  const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % headlines.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
   return (
     <section className="container grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
-      <div className="text-center lg:text-start space-y-6">
-        <main className="text-5xl md:text-6xl font-bold">
-          <h1 className="inline">
-            <span className="inline bg-gradient-to-r from-[#F596D3]  to-[#D247BF] text-transparent bg-clip-text">
-              Shadcn
-            </span>{" "}
-            landing page
-          </h1>{" "}
-          for{" "}
-          <h2 className="inline">
-            <span className="inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text">
-              React
-            </span>{" "}
-            developers
-          </h2>
+      <div
+        className="text-center lg:text-start space-y-6"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <main className="text-4xl md:text-5xl lg:text-6xl font-bold h-[150px] sm:h-[120px] md:h-[150px] flex items-center select-none justify-center lg:justify-start">
+          <h1 className="leading-tight transition-all duration-500 ease-in-out">
+            <span className="bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#6366F1] text-transparent bg-clip-text">
+              {headlines[index]}
+            </span>
+          </h1>
         </main>
 
-        <p className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
-          Build your React landing page effortlessly with the required sections
-          to your project.
+        <p className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0 leading-relaxed">
+          Funnel tracks user activity, predicts exit intent, and automatically runs targeted campaigns to recover lost signups and carts. No complex setup, no manual workflows.
         </p>
 
-        <div className="space-y-4 md:space-y-0 md:space-x-4">
-          <Button className="w-full md:w-1/3">Get Started</Button>
+        <div className="space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row">
+          <a
+            href="#newsletter"
+            className={`w-full md:w-1/3 text-center ${buttonVariants({
+              variant: "default",
+            })}`}
+          >
+            Get Early Access
+          </a>
 
           <a
-            rel="noreferrer noopener"
-            href="https://github.com/leoMirandaa/shadcn-landing-page.git"
-            target="_blank"
-            className={`w-full md:w-1/3 ${buttonVariants({
+            href="#howItWorks"
+            className={`w-full md:w-1/3 text-center ${buttonVariants({
               variant: "outline",
             })}`}
           >
-            Github Repository
-            <GitHubLogoIcon className="ml-2 w-5 h-5" />
+            See How It Works
           </a>
         </div>
       </div>

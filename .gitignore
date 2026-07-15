@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Agent / debug files
+.agents/
+.chrome-debug-profile/
+skills-lock.json
+*.cjs
+!generate_lottie.cjs
+*.png
+*.xml
+*.html
+*.log
+
