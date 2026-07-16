@@ -4,8 +4,7 @@ Funnel AI is a premium, AI-powered visitor recovery platform that detects visito
 
 ## Demo
 
-- **Live URL**: `https://github.com/harshitkukreja2007/landing-page` (Placeholder / Repository link)
-- **Screenshots**: Placeholder (To be updated after staging deployment)
+- **Live URL**: https://landing-page-ochre-three-76.vercel.app/
 
 ---
 
